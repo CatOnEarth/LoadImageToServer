@@ -1,0 +1,123 @@
+\hypertarget{_main_activity_8java_source}{}\doxysection{Main\+Activity.\+java}
+\label{_main_activity_8java_source}\index{app/src/main/java/com/snail/loadimagetoserver/MainActivity.java@{app/src/main/java/com/snail/loadimagetoserver/MainActivity.java}}
+\mbox{\hyperlink{_main_activity_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00001}00001 \textcolor{keyword}{package }com.snail.loadimagetoserver;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00004}00004 \textcolor{keyword}{import} androidx.activity.result.ActivityResultLauncher;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00005}00005 \textcolor{keyword}{import} androidx.activity.result.contract.ActivityResultContracts;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00006}00006 \textcolor{keyword}{import} androidx.annotation.NonNull;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00007}00007 \textcolor{keyword}{import} androidx.appcompat.app.AppCompatActivity;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00009}00009 \textcolor{keyword}{import} android.app.Activity;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00010}00010 \textcolor{keyword}{import} android.content.Intent;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00011}00011 \textcolor{keyword}{import} android.net.Uri;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00012}00012 \textcolor{keyword}{import} android.os.Bundle;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00013}00013 \textcolor{keyword}{import} android.util.Log;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00014}00014 \textcolor{keyword}{import} android.view.View;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00015}00015 \textcolor{keyword}{import} android.widget.Button;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00016}00016 \textcolor{keyword}{import} android.widget.ImageView;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00017}00017 \textcolor{keyword}{import} android.widget.Toast;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00019}00019 \textcolor{keyword}{import} java.io.File;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00020}00020 \textcolor{keyword}{import} java.io.IOException;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00022}00022 \textcolor{keyword}{import} okhttp3.MediaType;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00023}00023 \textcolor{keyword}{import} okhttp3.MultipartBody;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00024}00024 \textcolor{keyword}{import} okhttp3.RequestBody;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00025}00025 \textcolor{keyword}{import} okhttp3.ResponseBody;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00026}00026 \textcolor{keyword}{import} retrofit2.Call;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00027}00027 \textcolor{keyword}{import} retrofit2.Callback;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00028}00028 \textcolor{keyword}{import} retrofit2.Response;}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00031}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity}{00031}} \textcolor{keyword}{public} \textcolor{keyword}{class }\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity}{MainActivity}} \textcolor{keyword}{extends} AppCompatActivity \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00033}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_ab79264afc3c676cf7f90a45b40f93bb8}{00033}}     \textcolor{keyword}{private} ImageView \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_ab79264afc3c676cf7f90a45b40f93bb8}{avatarImage}};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00034}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a0c8a8ce2374ed959eaf11babaa67076c}{00034}}     \textcolor{keyword}{private} Uri       \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a0c8a8ce2374ed959eaf11babaa67076c}{uri}};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00040}00040     @Override}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00041}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a54c063f5920ee0b65613558044b61f76}{00041}}     \textcolor{keyword}{protected} \textcolor{keywordtype}{void} \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a54c063f5920ee0b65613558044b61f76}{onCreate}}(Bundle savedInstanceState) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00042}00042         super.onCreate(savedInstanceState);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00043}00043         setContentView(R.layout.activity\_main);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00045}00045         \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a0c8a8ce2374ed959eaf11babaa67076c}{uri}} = \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00047}00047         \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_ab79264afc3c676cf7f90a45b40f93bb8}{avatarImage}}  = findViewById(R.id.imageViewAvatar);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00048}00048         Button bLoad = findViewById(R.id.buttonLoad);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00050}00050         \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_ab79264afc3c676cf7f90a45b40f93bb8}{avatarImage}}.setOnClickListener(this::openFileDialog);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00051}00051         bLoad.setOnClickListener(view -\/> \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a8ebaddf439443cf736a69c02b23cdec3}{LoadImageToServer}}());}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00052}00052     \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00057}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a8ebaddf439443cf736a69c02b23cdec3}{00057}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a8ebaddf439443cf736a69c02b23cdec3}{LoadImageToServer}}() \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00058}00058         \textcolor{keywordflow}{if} (\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a0c8a8ce2374ed959eaf11babaa67076c}{uri}} == \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00059}00059             Toast.makeText(\textcolor{keyword}{this}, \textcolor{stringliteral}{"{}Выберите изображение"{}}, Toast.LENGTH\_LONG).show();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00060}00060             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00061}00061         \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00062}00062 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00063}00063         \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a6d67a3610cfd543b1c499db5c0500f5a}{uploadFile}}(\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a0c8a8ce2374ed959eaf11babaa67076c}{uri}});}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00064}00064     \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00067}00067     ActivityResultLauncher<Intent> selectActivityRes = registerForActivityResult(}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00068}00068             \textcolor{keyword}{new} ActivityResultContracts.StartActivityForResult(),}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00069}00069             result -\/> \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00070}00070                 if (result.getResultCode() == Activity.RESULT\_OK) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00071}00071                     Intent data = result.getData();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00072}00072                     if (data != null) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00073}00073                         uri = data.getData();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00074}00074                         avatarImage.setImageURI(uri);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00075}00075                     \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00076}00076                 \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00077}00077             \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00078}00078     );}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00084}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a3f9740eaf197bfa99f7c65a27e01de11}{00084}}     \textcolor{keyword}{public} \textcolor{keywordtype}{void} \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a3f9740eaf197bfa99f7c65a27e01de11}{openFileDialog}}(View view) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00085}00085         Intent data = \textcolor{keyword}{new} Intent(Intent.ACTION\_OPEN\_DOCUMENT);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00086}00086         data.setType(\textcolor{stringliteral}{"{}image/*"{}});}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00087}00087         data = Intent.createChooser(data, \textcolor{stringliteral}{"{}Choose an avatar"{}});}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00088}00088         selectActivityRes.launch(data);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00089}00089     \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00090}00090 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00095}\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a6d67a3610cfd543b1c499db5c0500f5a}{00095}}     \textcolor{keyword}{private} \textcolor{keywordtype}{void} \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity_a6d67a3610cfd543b1c499db5c0500f5a}{uploadFile}}(Uri fileUri) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00096}00096         \mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service}{FileUploadService}} service = \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_service_generator}{ServiceGenerator}}.\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_service_generator_a228ecb0aa327966366f16b8517f64116}{createService}}(\mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service}{FileUploadService}}.class);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00097}00097 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00098}00098         File file = \textcolor{keyword}{null};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00099}00099         \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00100}00100             file = \mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_file_util}{FileUtil}}.\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_file_util_a621cc388ad06e3dd336ce9b6d12dc928}{from}}(\mbox{\hyperlink{classcom_1_1snail_1_1loadimagetoserver_1_1_main_activity}{MainActivity}}.this,fileUri);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00101}00101         \} \textcolor{keywordflow}{catch} (IOException e) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00102}00102             e.printStackTrace();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00103}00103         \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00104}00104 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00105}00105         \textcolor{keywordflow}{if} (file == \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00106}00106             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00107}00107         \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00108}00108 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00109}00109         RequestBody requestFile = RequestBody.create(}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00110}00110                         MediaType.parse(getContentResolver().getType(fileUri)), file);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00112}00112         MultipartBody.Part body =}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00113}00113                 MultipartBody.Part.createFormData(\textcolor{stringliteral}{"{}picture"{}}, file.getName(), requestFile);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00115}00115         String descriptionString = \textcolor{stringliteral}{"{}description"{}};}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00116}00116         RequestBody description = RequestBody.create(}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00117}00117                         okhttp3.MultipartBody.FORM, descriptionString);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00119}00119         Call<ResponseBody> call = service.\mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service_a413d470ebbe94f8cf1e65277806e7d32}{upload}}(description, body);}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00120}00120         call.enqueue(\textcolor{keyword}{new} Callback<ResponseBody>() \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00121}00121             @Override}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00122}00122             \textcolor{keyword}{public} \textcolor{keywordtype}{void} onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00123}00123                 Log.v(\textcolor{stringliteral}{"{}Upload"{}}, \textcolor{stringliteral}{"{}success"{}});}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00124}00124                 Toast.makeText(getApplicationContext(), \textcolor{stringliteral}{"{}Загрузка завершена"{}}, Toast.LENGTH\_LONG).show();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00125}00125             \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00127}00127             @Override}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00128}00128             \textcolor{keyword}{public} \textcolor{keywordtype}{void} onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) \{}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00129}00129                 Log.e(\textcolor{stringliteral}{"{}Upload error:"{}}, t.getMessage());}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00130}00130                 Toast.makeText(getApplicationContext(), \textcolor{stringliteral}{"{}Ошибка при загрузке"{}}, Toast.LENGTH\_LONG).show();}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00131}00131             \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00132}00132         \});}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00133}00133     \}}
+\DoxyCodeLine{\Hypertarget{_main_activity_8java_source_l00134}00134 \}}
+
+\end{DoxyCode}

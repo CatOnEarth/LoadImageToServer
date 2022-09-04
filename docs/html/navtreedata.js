@@ -24,12 +24,30 @@
 */
 var NAVTREE =
 [
-  [ "My Project", "index.html", ]
+  [ "My Project", "index.html", [
+    [ "LoadImageToServer", "md__r_e_a_d_m_e.html", null ],
+    [ "Packages", "namespaces.html", [
+      [ "Package List", "namespaces.html", null ]
+    ] ],
+    [ "Classes", "annotated.html", [
+      [ "Class List", "annotated.html", "annotated_dup" ],
+      [ "Class Index", "classes.html", null ],
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
+    [ "Files", "files.html", [
+      [ "File List", "files.html", "files_dup" ]
+    ] ]
+  ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"index.html"
+"_build_config_8java.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

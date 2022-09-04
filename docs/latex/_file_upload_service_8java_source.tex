@@ -1,0 +1,24 @@
+\hypertarget{_file_upload_service_8java_source}{}\doxysection{File\+Upload\+Service.\+java}
+\label{_file_upload_service_8java_source}\index{app/src/main/java/com/snail/loadimagetoserver/FileUploadService.java@{app/src/main/java/com/snail/loadimagetoserver/FileUploadService.java}}
+\mbox{\hyperlink{_file_upload_service_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00001}00001 \textcolor{keyword}{package }com.snail.loadimagetoserver;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00003}00003 \textcolor{keyword}{import} okhttp3.MultipartBody;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00004}00004 \textcolor{keyword}{import} okhttp3.RequestBody;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00005}00005 \textcolor{keyword}{import} okhttp3.ResponseBody;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00006}00006 \textcolor{keyword}{import} retrofit2.Call;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00007}00007 \textcolor{keyword}{import} retrofit2.http.Multipart;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00008}00008 \textcolor{keyword}{import} retrofit2.http.POST;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00009}00009 \textcolor{keyword}{import} retrofit2.http.Part;}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00010}00010 }
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00012}\mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service}{00012}} \textcolor{keyword}{public} \textcolor{keyword}{interface }\mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service}{FileUploadService}} \{}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00013}00013     @Multipart}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00014}00014     @POST(\textcolor{stringliteral}{"{}upload"{}})}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00015}\mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service_a413d470ebbe94f8cf1e65277806e7d32}{00015}}     Call<ResponseBody> \mbox{\hyperlink{interfacecom_1_1snail_1_1loadimagetoserver_1_1_file_upload_service_a413d470ebbe94f8cf1e65277806e7d32}{upload}}(}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00016}00016             @Part("{}description"{}) RequestBody description,}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00017}00017             @Part MultipartBody.Part file}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00018}00018     );}
+\DoxyCodeLine{\Hypertarget{_file_upload_service_8java_source_l00019}00019 \}}
+
+\end{DoxyCode}
