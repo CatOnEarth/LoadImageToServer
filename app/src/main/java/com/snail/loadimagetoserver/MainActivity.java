@@ -1,17 +1,36 @@
 package com.snail.loadimagetoserver;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.FileUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /** Main class of launched activity */
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
+        uploadFile(uri);
     }
 
     /** Browser for select avatar */
@@ -74,5 +93,51 @@ public class MainActivity extends AppCompatActivity {
         data.setType("image/*");
         data = Intent.createChooser(data, "Choose an avatar");
         selectActivityRes.launch(data);
+    }
+
+    /**
+     *
+     * @param fileUri file Uri
+     */
+    private void uploadFile(Uri fileUri) {
+        FileUploadService service =
+                ServiceGenerator.createService(FileUploadService.class);
+
+        File file = null;
+        try {
+            file = FileUtil.from(MainActivity.this,fileUri);
+            Log.d("file", "File...:::: uti - "+file .getPath()+" file -" + file + " : " + file .exists());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse(getContentResolver().getType(fileUri)),
+                        file
+                );
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
+
+        String descriptionString = "hello, this is description speaking";
+        RequestBody description =
+                RequestBody.create(
+                        okhttp3.MultipartBody.FORM, descriptionString);
+
+        Call<ResponseBody> call = service.upload(description, body);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call,
+                                   Response<ResponseBody> response) {
+                Log.v("Upload", "success");
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("Upload error:", t.getMessage());
+            }
+        });
     }
 }
