@@ -2,6 +2,10 @@
 Load selected in application image to your own server
 
 <p>
+Documentation(Dozywizard): https://catonearth.github.io/LoadImageToServer/html/
+<p>
+    
+<p>
 Main activity screenshot
 <p>
 
