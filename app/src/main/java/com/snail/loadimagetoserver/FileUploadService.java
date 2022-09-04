@@ -8,6 +8,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 
+/** Interface retfotit */
 public interface FileUploadService {
     @Multipart
     @POST("upload")

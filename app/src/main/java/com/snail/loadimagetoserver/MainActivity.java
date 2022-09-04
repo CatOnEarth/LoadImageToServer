@@ -1,20 +1,15 @@
 package com.snail.loadimagetoserver;
 
-import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
-import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -53,14 +48,12 @@ public class MainActivity extends AppCompatActivity {
         Button bLoad = findViewById(R.id.buttonLoad);
 
         avatarImage.setOnClickListener(this::openFileDialog);
-        bLoad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoadImageToServer();
-            }
-        });
+        bLoad.setOnClickListener(view -> LoadImageToServer());
     }
 
+    /**Check selection image
+     *
+     */
     private void LoadImageToServer() {
         if (uri == null) {
             Toast.makeText(this, "Выберите изображение", Toast.LENGTH_LONG).show();
@@ -95,48 +88,46 @@ public class MainActivity extends AppCompatActivity {
         selectActivityRes.launch(data);
     }
 
-    /**
+    /** Upload file to server with retrofit
      *
      * @param fileUri file Uri
      */
     private void uploadFile(Uri fileUri) {
-        FileUploadService service =
-                ServiceGenerator.createService(FileUploadService.class);
+        FileUploadService service = ServiceGenerator.createService(FileUploadService.class);
 
         File file = null;
         try {
             file = FileUtil.from(MainActivity.this,fileUri);
-            Log.d("file", "File...:::: uti - "+file .getPath()+" file -" + file + " : " + file .exists());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        RequestBody requestFile =
-                RequestBody.create(
-                        MediaType.parse(getContentResolver().getType(fileUri)),
-                        file
-                );
+        if (file == null) {
+            return;
+        }
+
+        RequestBody requestFile = RequestBody.create(
+                        MediaType.parse(getContentResolver().getType(fileUri)), file);
 
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("picture", file.getName(), requestFile);
 
-        String descriptionString = "hello, this is description speaking";
-        RequestBody description =
-                RequestBody.create(
+        String descriptionString = "description";
+        RequestBody description = RequestBody.create(
                         okhttp3.MultipartBody.FORM, descriptionString);
 
         Call<ResponseBody> call = service.upload(description, body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call,
-                                   Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 Log.v("Upload", "success");
+                Toast.makeText(getApplicationContext(), "Загрузка завершена", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 Log.e("Upload error:", t.getMessage());
+                Toast.makeText(getApplicationContext(), "Ошибка при загрузке", Toast.LENGTH_LONG).show();
             }
         });
     }
